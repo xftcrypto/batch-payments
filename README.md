@@ -3,8 +3,8 @@ BatchTransfer.sol
 
 ### Sepolia
 - BatchTransfer.sol: [0xcE7234872b5957eB2d7C7C2eDab945DA3D37c681](https://sepolia.etherscan.io/address/0xcE7234872b5957eB2d7C7C2eDab945DA3D37c681)
-- USDX Proxy: [0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1](https://sepolia.etherscan.io/address/0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1)
-- USDX.sol: [0xf6080682dFCa67A25F294343a03C8cd8675cc41E](https://sepolia.etherscan.io/address/0xf6080682dfca67a25f294343a03c8cd8675cc41e#code)
+- USDX.sol Proxy: [0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1](https://sepolia.etherscan.io/address/0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1)
+- USDX.sol Implementation: [0xf6080682dFCa67A25F294343a03C8cd8675cc41E](https://sepolia.etherscan.io/address/0xf6080682dfca67a25f294343a03c8cd8675cc41e#code)
 
 
 ### Public and External Functions
