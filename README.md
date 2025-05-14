@@ -1,6 +1,33 @@
 # XFT Batch Payments
 BatchTransfer.sol
 
+- BatchTransfer.sol → ERC1967Proxy.sol → USDX Implementation
+
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant BC as BatchTransfer.sol
+    participant Proxy as ERC1967Proxy.sol
+    participant USDX as USDX.sol
+    
+    User->>Proxy: approve(BatchTransfer, totalAmount)
+    Proxy->>USDX: delegatecall
+    
+    User->>BC: batchTransfer(recipients[], amount)
+    BC->>Proxy: allowance(user, this)
+    Proxy->>USDX: delegatecall
+    
+    loop For each recipient
+        BC->>Proxy: transferFrom(user, recipient, amount)
+        Proxy->>USDX: delegatecall
+    end
+    
+    BC-->>User: emit Batch(user, recipients, amount)
+```
+
+
+
 ### Sepolia
 - BatchTransfer.sol: [0xcE7234872b5957eB2d7C7C2eDab945DA3D37c681](https://sepolia.etherscan.io/address/0xcE7234872b5957eB2d7C7C2eDab945DA3D37c681)
 - USDX.sol Proxy: [0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1](https://sepolia.etherscan.io/address/0x2f572059dbc598c8acfea4af06fe4f7669d1b3b1)
