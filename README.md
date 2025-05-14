@@ -1,6 +1,25 @@
 # XFT Batch Payments
-BatchTransfer.sol
 
+BatchTransfer.sol enables sending identical USDX amounts to multiple recipients in one transaction. Use cases:
+
+- Mass payouts (employee salaries)
+- Airdrops to community
+- Dividend distributions
+- Reward distributions
+- Team allocations
+
+Benefits: Gas efficiency, convenience, single transaction record.
+
+### User Flow - Batch Payments
+
+1. User has 1000 USDX tokens
+2. User approves BatchTransfer to spend 500 USDX
+3. User calls batchTransfer([0xabc..., 0xdef...], 250)
+4. 250 USDX sent to each recipient (500 total)
+5. User has 500 USDX remaining
+
+
+## BatchTransfer.sol  
 - BatchTransfer.sol → ERC1967Proxy.sol → USDX Implementation
 
 
