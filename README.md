@@ -7,16 +7,17 @@ BatchTransfer.sol
 - USDX.sol Implementation: [0xf6080682dFCa67A25F294343a03C8cd8675cc41E](https://sepolia.etherscan.io/address/0xf6080682dfca67a25f294343a03c8cd8675cc41e#code)
 
 
-### Public and External Functions
+### BatchTransfer.sol
 ```
+PUBLIC AND EXTERNAL FUNCTIONS
 constructor(address _usdx): Sets USDX token address
 batchTransfer(address[] calldata recipients, uint256 amount): Sends same USDX amount to multiple recipients
-```
 
-### Events
-```
+EVENTS
 Batch(address indexed sender, address[] recipients, uint256 amount): Emitted after successful batch transfer.
 ```
+
+
 
 ### ABI
 ```json
