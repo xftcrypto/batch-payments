@@ -136,7 +136,9 @@ sequenceDiagram
 - Efficient: Single transaction for mass pension payouts.
 
 
-
+USDX.sol
+- USD retirement contribution --> Mint USDX
+- Retirement benefits = Transfer USDX 
 
 
 ### Wallet Generation
@@ -258,3 +260,9 @@ app.listen(3000, () => {
 
 ### Create Wallets
 - [XFT Wallet Generator](https://xft-eth-wallet-generator.lovable.app/)
+
+
+
+
+
+
