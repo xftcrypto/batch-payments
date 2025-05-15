@@ -2,13 +2,19 @@
 
 BatchTransfer.sol enables sending identical USDX amounts to multiple recipients in one transaction. Use cases:
 
-- Mass payouts (employee salaries)
-- Airdrops to community
-- Dividend distributions
-- Reward distributions
-- Team allocations
+- Pension Payments: Monthly retiree benefits
+- Healthcare Claims: Patient reimbursements
+- Tax Refunds: Government returns
+- Disaster Relief: Emergency aid
+- Utility Rebates: Conservation incentives
+- Insurance Payouts: Policy claims
+- Public Assistance: Welfare benefits
+- Interest Payments: Bond/loan earnings
+- Payroll: Employee salaries
+- Customer Refunds: Retail reimbursements
+- Grants: Scholarship funding
 
-Benefits: Gas efficiency, convenience, single transaction record.
+Benefits: Gas efficiency, convenience, instant + 24/7/365 + global + transparent + immutable transaction record.
 
 ### User Flow - Batch Payments
 
