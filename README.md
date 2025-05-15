@@ -254,3 +254,7 @@ app.listen(3000, () => {
 3. Private keys saved to server-side file
 4. Only addresses returned to frontend
 5. Frontend displays addresses in table
+
+
+### Create Wallets
+- [XFT Wallet Generator](https://xft-eth-wallet-generator.lovable.app/)
