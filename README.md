@@ -126,7 +126,7 @@ sequenceDiagram
 ```
 
 
-**Benefits Demo Flow**:
+**Retirement Benefits Demo Flow**:
 - Admin uploads CSV with retiree addresses and benefit amount via XFT Web App.
 - App shows total cost preview.
 - Admin approves `BatchTransfer.sol` to spend USDX tokens.
@@ -134,3 +134,123 @@ sequenceDiagram
 - `BatchTransfer` loops, calling `transferFrom` on USDX proxy for each retiree.
 - USDX emits `Transfer` events; `BatchTransfer` emits `Batch` event.
 - Efficient: Single transaction for mass pension payouts.
+
+
+
+
+
+### Wallet Generation
+
+## Purpose
+Generate 10 Ethereum wallets with private keys stored in code but not displayed in UI.
+
+## Tech Stack
+- Node.js
+- ethers.js for wallet generation
+- Simple HTML/CSS frontend (Arial, black/white)
+
+## Implementation
+
+### Backend (Node.js)
+```javascript
+// wallets.js
+const { ethers } = require('ethers');
+
+// Generate and store wallets
+function generateWallets() {
+  const wallets = [];
+  const privateKeys = [];
+  
+  for(let i = 0; i < 10; i++) {
+    const wallet = ethers.Wallet.createRandom();
+    wallets.push({
+      address: wallet.address,
+      index: i + 1
+    });
+    // Store private keys in memory only
+    privateKeys.push(wallet.privateKey);
+  }
+  
+  // Write private keys to secure file
+  const fs = require('fs');
+  fs.writeFileSync('private_keys.json', JSON.stringify(privateKeys, null, 2));
+  
+  return wallets;
+}
+
+module.exports = { generateWallets };
+```
+
+### Frontend (Express Server)
+```javascript
+// server.js
+const express = require('express');
+const app = express();
+const { generateWallets } = require('./wallets');
+
+app.use(express.static('public'));
+
+app.get('/generate', (req, res) => {
+  const wallets = generateWallets();
+  res.json({ wallets });
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+```
+
+### Frontend (HTML/JS)
+```html
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ETH Wallet Generator</title>
+  <style>
+    body { font-family: Arial; color: black; background: white; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>Ethereum Wallet Generator</h1>
+  <button id="generate">Generate 10 Wallets</button>
+  <div id="result">
+    <table id="wallets">
+      <thead><tr><th>#</th><th>Address</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <script>
+    document.getElementById('generate').addEventListener('click', async () => {
+      const response = await fetch('/generate');
+      const data = await response.json();
+      
+      const tbody = document.querySelector('#wallets tbody');
+      tbody.innerHTML = '';
+      
+      data.wallets.forEach(wallet => {
+        const row = document.createElement('tr');
+        row.innerHTML = `<td>${wallet.index}</td><td>${wallet.address}</td>`;
+        tbody.appendChild(row);
+      });
+    });
+  </script>
+</body>
+</html>
+```
+
+## Security Notes
+- Private keys stored in `private_keys.json` file on server
+- Only addresses transmitted to frontend
+- File permissions should be restricted
+- For production: encrypt keys or use hardware security module
+
+## Data Flow
+1. User clicks "Generate"
+2. Server creates 10 random wallets
+3. Private keys saved to server-side file
+4. Only addresses returned to frontend
+5. Frontend displays addresses in table
