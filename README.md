@@ -103,3 +103,34 @@ git commit -m "X"
 git push -f origin main
 ```
 
+### RETIREMENT
+
+```mermaid
+sequenceDiagram
+    actor Admin
+    participant App as XFT Web App
+    participant Batch as BatchTransfer.sol
+    participant USDX as USDX Proxy
+    participant Ret as Retiree
+
+    Admin->>App: upload CSV + amount
+    App-->>Admin: preview total
+    Admin->>USDX: approve(Batch,total)
+    USDX-->>Admin: approved
+    Admin->>Batch: batchTransfer(recipients,benefit)
+    loop each retiree
+        Batch->>USDX: transferFrom(Admin,Ret,benefit)
+        USDX-->>Ret: transfer event
+    end
+    Batch-->>Admin: Batch event
+```
+
+
+**Benefits Demo Flow**:
+- Admin uploads CSV with retiree addresses and benefit amount via XFT Web App.
+- App shows total cost preview.
+- Admin approves `BatchTransfer.sol` to spend USDX tokens.
+- Admin calls `batchTransfer`, sending fixed benefit to each retiree.
+- `BatchTransfer` loops, calling `transferFrom` on USDX proxy for each retiree.
+- USDX emits `Transfer` events; `BatchTransfer` emits `Batch` event.
+- Efficient: Single transaction for mass pension payouts.
